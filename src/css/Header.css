@@ -1,0 +1,67 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 32px;
+}
+.logo-s {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.search {
+  width: 300px;
+  height: 55px;
+  border: 1px solid #bdbdbd;
+  box-sizing: border-box;
+  filter: drop-shadow(0px 1px 6px rgba(0, 0, 0, 0.1));
+  border-radius: 12px;
+  background-color: #ffffff;
+  padding: 15px;
+  display: flex;
+}
+.search > input {
+  border: transparent;
+  height: 100%;
+  font-family: "Noto Sans", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  color: #bdbdbd;
+  padding-left: 24px;
+}
+.search > input:focus {
+  outline: none;
+}
+.icon-s {
+  width: 27px;
+  height: 33px;
+  color: #bdbdbd;
+}
+.my-btn {
+  width: 137px;
+  height: 55px;
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  font-family: "Noto Sans", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 22px;
+  background-color: #3db46d !important;
+  color: #ffffff;
+}
+
+@media screen and (max-width: 770px) {
+  .logo-s {
+    flex-direction: column;
+    align-items: center;
+  }
+  .header{
+      flex-direction: column
+  }
+  .search{
+    margin: 15px;
+  }
+}
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&display=swap");
