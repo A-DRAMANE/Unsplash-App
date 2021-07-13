@@ -1,0 +1,62 @@
+.main{
+    height: auto;
+    display: flex;
+    align-items: start;
+    flex-direction: row;
+    justify-content: center;
+    transition: 1s;
+}
+.items{
+    width: auto;
+    height: auto;
+    background-color: #333;
+    border-radius: 16px;
+}
+.cart{
+    width: 370px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    justify-content: center;
+}
+.overEff{
+    width: 100% !important;
+    height: 100%;
+    position: absolute;
+    width: 100% !important;
+    height: 100%;
+    position: absolute;
+    background-color: #00000082;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 16px;
+    opacity: 0;
+    transition: 1s;
+}
+.overEff:hover{
+    opacity: 1;
+}
+.overEff .btn{
+    width: 40%;
+    align-self: end;
+    margin: 12px;
+    font-weight: bold;
+    color: white;
+}
+.overEff p{
+    margin-top: 0;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    color: white;
+    padding: 15px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+}
+.opacity{
+    opacity: 1 !important;
+}

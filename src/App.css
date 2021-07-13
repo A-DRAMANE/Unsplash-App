@@ -1,4 +1,11 @@
 .App {
   background-color: #ffffff;
   height: 100vh;
+  padding: 0px !important;
+}
+img{
+  background-color: transparent
+}
+form{
+  background-color: white;
 }
