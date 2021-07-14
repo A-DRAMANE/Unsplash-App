@@ -21,7 +21,6 @@ export const AddNewUser = (mail,name,pass) =>{
 
     Axios.get("http://"+host+":"+port+paht+"?AddUser&mail="+mail+"&name="+name+"&pass="+pass)
 
-
 }
 
 export const AddNewPic = (id,image) =>{

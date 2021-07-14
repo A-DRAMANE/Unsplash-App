@@ -3,11 +3,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Form, Button } from 'react-bootstrap'
 import { Annim2, rev, imgAnniView } from '../gsapAnnim'
 import '../css/AddPic.css'
+import axios, { post } from 'axios'
 
 function AddPic({ AddImage,x, setx }) {
 
     const [imageSelect, setImageSelect] = useState()
     const [baseImage, setBaseImage] = useState("");
+
+    console.log("c",baseImage);
 
 
 
@@ -35,8 +38,43 @@ function AddPic({ AddImage,x, setx }) {
         setBaseImage(base64);
         let ok = JSON.stringify(base64);
         console.log('S',ok);
-        
-        fetch("http://localhost:80/API/txt.php?AddPic&image="+ok+"&id=10");
+        const AddPic = {
+            image:JSON.stringify(base64),
+            id:101
+        }
+
+        let AddPi = JSON.stringify(AddPic)
+        //
+
+        let formData = new FormData()
+        formData.append('file',base64)
+        const config = {
+            headers: {'Content-Type': 'multipart/form-data' }
+        }
+
+
+        /*post("http://localhost:80/API/txt.php",formData,config).then(res =>{
+            console.log(res.data);
+        })*/
+
+        fetch("http://192.168.1.10/API/txt.php",{
+            method: 'post',
+            body: {
+                data:'salut'
+            }
+        }).then((response) => response.json())
+        .then(response =>{console.log(response);})
+
+        // axios.post("http://localhost/API/txt.php",{
+        //         'data': 'test'})
+        //     .then(function (response) {
+        //         //handle success
+        //         console.log(response.data);
+        //     })
+        //     .catch(function (response) {
+        //         //handle error
+        //         console.log(response);
+        //     });
     }
 
     const convertBase64 = (file) => {
@@ -73,6 +111,7 @@ function AddPic({ AddImage,x, setx }) {
                 </Form.Group>
 
                 <div className='addPicBtn'>
+                    
                    <input
                         className='input' 
                         type="file" 
