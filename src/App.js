@@ -11,7 +11,7 @@ import Inscription from './components/Inscription'
 function App() {
   return (
     <Router>
-      <Container className="App ">
+      <Container className="App">
         <Switch>
           
           <Route exact path='/'>

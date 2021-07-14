@@ -36,3 +36,28 @@ export const rev = (element) =>{
     })
 
 }
+
+//message annim
+export const messageAnni = (element) =>{
+
+    gsap.to(element.current,{
+        x:15,
+        opacity:1,
+        duration:1,
+        display:'block',
+
+    })
+
+}
+
+//image view when addNewImg annim
+export const imgAnniView = (element) =>{
+
+    gsap.from(element.current,{
+        y:15,
+        opacity:0,
+        duration:1,
+
+    })
+
+}
