@@ -17,6 +17,7 @@ import image10 from '../images/virgyl-sowah-E9NPWGBXM9o-unsplash2 - Copie.png'
 
 function Main() {
 
+    console.log(localStorage);
     const imgClick = (e) =>{
         e.target.classList.toggle('opacity')
     }

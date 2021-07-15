@@ -19,7 +19,7 @@ function App() {
             <Main/>
           </Route>
 
-          <Route path='/connection'>
+          <Route path='/connexion'>
             <Connexion/>
           </Route>
 

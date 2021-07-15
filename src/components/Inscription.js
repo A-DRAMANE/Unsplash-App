@@ -4,6 +4,7 @@ import logo from '../images/my_unsplash_logo.svg'
 import { Annim1, messageAnni } from '../gsapAnnim'
 import {useHistory} from 'react-router-dom'
 import { AddNewUser } from '../API/fetchFonc'
+import { getResult } from '../localStorage/getData' 
 
 function Inscription() {
 
@@ -11,38 +12,49 @@ function Inscription() {
     const mess = useRef(null)
     let history = useHistory();
     let myRegex = /^[a-zA-Z-]+$/;
+    let messageShow = 'veillez remplir correctement les champs!';
 
     const [mail, setMail] = useState('')
     const [name, setName] = useState('')
     const [pass, setPass] = useState('')
+    const [Status, setStatus] = useState(0);
+    const [message, setMessage] = useState('')
 
+    useEffect(() => {
+        if(getResult()){
+            if( !getResult().success ) {
+                setMessage(getResult().error)
+            }
+            else{
+                console.log(getResult());
+                history.push("/")
+            }
+        }
+    }, [Status])
 
     useEffect(() => {
         Annim1(ConnAnnim)
     }, [])
 
-    const handleInscription = (e) => {
+    const handleInscription = async (e) => {
         e.preventDefault();
 
-        console.log(name.length);
-
         if ( !myRegex.test(name) || !myRegex.test(pass)) {
-            console.log('cest pas bon');
+            console.log("non");
+            setMessage(messageShow);
             messageAnni(mess)
-        }else{
-            
-            if (name.length >1 && pass.length > 2) {
-                console.log('zooooo');
-                console.log(mail,name,pass);
-                AddNewUser(mail,name,pass);
-                history.push('/')
+        }
+        else{
+
+            if (name.length >2 && pass.length > 2) {
+                await AddNewUser(mail,name,pass);
+                setStatus(Status + 1)
             }else{
-                console.log('non non');
+                setMessage(messageShow);
                 messageAnni(mess)
             }
         }
-
-        ;}
+    }
 
     return (
         <div className='inCenter'>
@@ -51,14 +63,14 @@ function Inscription() {
                 <img src={logo}/>
                 <form onSubmit={handleInscription} className='inForm'>
                     <input required
-                     onChange={e => setName(e.target.value
-                        )}
-                        placeholder='Nom utilisateur' type='text'/>
-                    
-                    <input required
                      onChange={e => setMail(e.target.value
                         )}
                         placeholder='Adress mail' type='email'/>
+                    
+                    <input required
+                     onChange={e => setName(e.target.value
+                        )}
+                        placeholder='Nom utilisateur' type='text'/>
                     
                     <input required
                      onChange={e => setPass(e.target.value
@@ -66,7 +78,7 @@ function Inscription() {
                         placeholder='Mot de passe' type='password'/>
                     
                     <button>commencer</button>
-                    <p ref={mess} className='message'>veillez remplir correctement les champs!</p>
+                    {message !== '' ? <p ref={mess} className='message'>{message}</p> : ""}
                 </form>
             </div>
 

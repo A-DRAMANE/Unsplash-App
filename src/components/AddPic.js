@@ -58,7 +58,7 @@ function AddPic({ AddImage,x, setx }) {
         })*/
 
         fetch("http://192.168.1.10/API/txt.php",{
-            method: 'post',
+            method: 'POST',
             body: {
                 data:'salut'
             }

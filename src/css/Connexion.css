@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    height: 350px;
+    min-height: 350px;
     width: 100%;
     max-width: 300px;
     justify-content: space-around;
@@ -66,4 +66,11 @@
     font-size: small;
     text-decoration: underline;
     cursor: pointer;
+}
+.errorConn{
+    font-size: small;
+    background-color: #ffe3e3;
+    color: red;
+    font-weight: bold;
+    text-align: center;
 }

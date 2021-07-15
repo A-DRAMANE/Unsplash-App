@@ -40,9 +40,9 @@ export const rev = (element) =>{
 //message annim
 export const messageAnni = (element) =>{
 
-    gsap.to(element.current,{
+    gsap.from(element.current,{
         x:15,
-        opacity:1,
+        opacity:0,
         duration:1,
         display:'block',
 
