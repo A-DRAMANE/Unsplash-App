@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddUser;
+use App\Http\Controllers\AddImages;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('register',[AddUser::class,'register']);
 Route::post('logIn',[AddUser::class,'logIn']);
+Route::post('addImages',[AddImages::class,'addImages']);
+Route::post('imageList',[AddImages::class,'imageList']);

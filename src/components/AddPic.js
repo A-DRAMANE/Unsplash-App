@@ -3,19 +3,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Form, Button } from 'react-bootstrap'
 import { Annim2, rev, imgAnniView } from '../gsapAnnim'
 import '../css/AddPic.css'
-import axios, { post } from 'axios'
+import { AddNewPic } from '../API/fetchFonc'
+import { getCheckCharge } from '../localStorage/getData'
 
 function AddPic({ AddImage,x, setx }) {
 
-    const [imageSelect, setImageSelect] = useState()
+    console.log(getCheckCharge());
+    const [description, setDescription] = useState('')
+    const [imageSelected, setImageSelected] = useState(null)
     const [baseImage, setBaseImage] = useState("");
-
-    console.log("c",baseImage);
-
-
+    const [charge, setCharge] = useState(null)
+    const [status, setStatus] = useState(0)
 
     const formDiv = useRef(null)
     const imgToAdd = useRef(null)
+
     useEffect(() => {
         x && Annim2(AddImage)
     }, [x])
@@ -23,58 +25,44 @@ function AddPic({ AddImage,x, setx }) {
         imgAnniView(imgToAdd)
         console.log(baseImage);
     }, [baseImage])
+    useEffect(() => {
+        console.log(charge);
+        if (status!==0) {
+            setCharge(getCheckCharge())
+        }
+        
+    }, [status])
 
     const handleCansel = (e) =>{
-        e.preventDefault()
-        setBaseImage("")
-        rev(AddImage)
-        setx(false)
+        e.preventDefault();
+        setBaseImage("");
+        setCharge(null);
+        setStatus(0);
+        rev(AddImage);
+        setx(false);
     }
 
-    const handleAdd = async (e) =>{
-
-        const file = e.target.files[0];
-        const base64 = await convertBase64(file);
-        setBaseImage(base64);
-        let ok = JSON.stringify(base64);
-        console.log('S',ok);
-        const AddPic = {
-            image:JSON.stringify(base64),
-            id:101
-        }
-
-        let AddPi = JSON.stringify(AddPic)
-        //
-
-        let formData = new FormData()
-        formData.append('file',base64)
-        const config = {
-            headers: {'Content-Type': 'multipart/form-data' }
-        }
-
-
-        /*post("http://localhost:80/API/txt.php",formData,config).then(res =>{
-            console.log(res.data);
-        })*/
-
-        fetch("http://192.168.1.10/API/txt.php",{
-            method: 'POST',
-            body: {
-                data:'salut'
+    const handleLoad = async (e) =>{
+        e.preventDefault();
+        if (description.length > 2) {
+            if (imageSelected !== null) {
+                setCharge(false);
+                await AddNewPic(5,imageSelected,description);
+                setStatus(status + 1)
+            } else {
+                alert("selectionnez une image et decrivez la correctement, au moins 3 lettres.")
             }
-        }).then((response) => response.json())
-        .then(response =>{console.log(response);})
+        }else{
+            alert("selectionnez une image et decrivez la correctement, au moins 3 lettres.")
+        }
+        
+    }
 
-        // axios.post("http://localhost/API/txt.php",{
-        //         'data': 'test'})
-        //     .then(function (response) {
-        //         //handle success
-        //         console.log(response.data);
-        //     })
-        //     .catch(function (response) {
-        //         //handle error
-        //         console.log(response);
-        //     });
+    const handleImg = async (e) =>{
+        const file = e.target.files[0];
+        let base64 = await convertBase64(file);
+        setImageSelected(file);
+        setBaseImage(base64)
     }
 
     const convertBase64 = (file) => {
@@ -92,22 +80,15 @@ function AddPic({ AddImage,x, setx }) {
         });
       };
 
-    const handleLoad = (e) =>{
-        e.preventDefault()
-    }
-
     return (
         <div ref={AddImage} className='addPic'>
-            <Form ref={formDiv} className="formAdd">
+            <Form ref={formDiv} onSubmit={e => handleLoad(e)} className="formAdd">
                 <h2>Ajouter une nouvelle image</h2>
                 <Form.Group className="formCont" controlId="formBasicEmail">
                     <Form.Label className="addLabel">Description de l'image</Form.Label>
-                    <Form.Control type="text" placeholder="ex:Une personne qui sourit...." />
-                </Form.Group>
-
-                <Form.Group className="formCont" controlId="formBasicPassword">
-                    <Form.Label className="addLabel">LE lien URL de l'image</Form.Label>
-                    <Form.Control type="password" placeholder="https://www.w3schools.com/php/php_mysql_select.png" />
+                    <Form.Control
+                    onChange={e =>setDescription(e.target.value)}
+                     type="text" placeholder="ex:Une personne qui sourit...." />
                 </Form.Group>
 
                 <div className='addPicBtn'>
@@ -119,26 +100,37 @@ function AddPic({ AddImage,x, setx }) {
                         placeholder="Choose a file"
                         accept=".jpg, .jpeg, .png"
                         onChange={(e) =>{
-                            handleAdd(e)
+                            handleImg(e);
                     }}/>
 
                     <button>
                         <span className="iconify" data-icon="akar-icons:image" data-inline="false"></span>
-                        selectionner une image
+                        selectionnez une image
                     </button>
  
                 </div>
 
-                { baseImage == "" ? "" : <img ref={imgToAdd} className="imageView" src={baseImage} height="200px"/> }  
+                { baseImage == "" ? "" : <img ref={imgToAdd} className="imageView" src={baseImage} height="200px"/> }
+
+                {charge == false ? <div className='load'></div> : "" }
+                {charge == true ?  <div>Votre image à été ajouter!</div> :'' }
                 
+                {charge !== true ?
                 <div className='buttons'>
-                    <Button onClick={handleCansel} className='btnCans' variant="success" type="submit">
+                    <Button onClick={handleCansel} className='btnCans' variant="success">
                         Annuler
                     </Button>
                     <Button className='btnAdd' variant="success" type="submit">
                         Ajouter
                     </Button>
-                </div>
+                </div> :
+                <Button
+                onClick={handleCansel} 
+                 className='btnAdd m-3' variant="success">
+                    TERMINER
+                </Button>
+                }
+
             </Form>
         </div>
     )

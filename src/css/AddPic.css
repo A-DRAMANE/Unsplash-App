@@ -102,6 +102,26 @@
     border: 5px solid #001555;
     margin: 5px;
 }
+.load {
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    border: 5px solid #e5e5e5;
+    border-radius: 50%;
+    border-top: 5px solid blue;
+    box-shadow: 0, 0, 6px, 2px black;
+    animation: loader 1s linear infinite;
+    align-self: center;
+  }
+
+@keyframes loader {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 
 @media screen and (max-width:300px){
     .addPic form{

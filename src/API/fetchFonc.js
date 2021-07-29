@@ -1,67 +1,86 @@
 import Axios from 'axios'
-import { setResult } from '../localStorage/setData'
+import { setResult, setCheckCharge, setData } from '../localStorage/setData'
 const host = 'localhost';
 const port = 80;
 const paht = '/API/txt.php'
+
 export let resultat = false;
+export let AllImages = false;
 
-export const getAllUser = () =>{
 
-    fetch("http://"+host+":"+port+paht+"?callAll")
-        .then((response) => response.json())
-        .then((response) => {
-            let USER = JSON.parse(response)
-            return USER;
+export const AddNewUser = async (mail, name, pass) => {
+
+    let user = { mail, name, pass }
+
+    await fetch("http://localhost:8000/api/register", {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: {
+            "Content-Type": 'application/json',
+            "Accept": 'application/json'
+        }
+    }).then((response) => response.json())
+        .then(response => {
+            resultat = response;
+            setResult(resultat);
+            console.log(response);
         })
-        .catch((response) =>{
-             console.log("ERREUR CHARGEMENT",response)
-             return false
-            })
-}
-
-export const AddNewUser = async (mail,name,pass) =>{
-
-    let user = {mail,name,pass}
-
-    await fetch("http://localhost:8000/api/register",{
-        method:'POST',
-        body:JSON.stringify(user),
-        headers:{
-            "Content-Type":'application/json',
-            "Accept":'application/json'
-        }
-    }).then((response) => response.json())
-    .then(response =>{
-        resultat = response;
-        setResult(resultat);
-        console.log(response);})
-
-    // Axios.get("http://"+host+":"+port+paht+"?AddUser&mail="+mail+"&name="+name+"&pass="+pass)
 
 }
-export const LogIn = async (name,pass) =>{
+export const LogIn = async (name, pass) => {
 
-    let user = {name,pass}
+    let user = { name, pass }
 
-    await fetch("http://localhost:8000/api/logIn",{
-        method:'POST',
-        body:JSON.stringify(user),
-        headers:{
-            "Content-Type":'application/json',
-            "Accept":'application/json'
+    await fetch("http://localhost:8000/api/logIn", {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: {
+            "Content-Type": 'application/json',
+            "Accept": 'application/json'
         }
     }).then((response) => response.json())
-    .then(response =>{
-        resultat = response;
-        setResult(resultat)
+        .then(response => {
+            resultat = response;
+            setResult(resultat)
+        })
+
+}
+
+export const AddNewPic = async (id, file, description) => {
+    console.log(id, file, description);
+
+    const formData = new FormData();
+    formData.append('idUser', id);
+    formData.append('file', file);
+    formData.append('description', description);
+
+    await fetch("http://localhost:8000/api/addImages", {
+        method: 'POST',
+        body: formData
     })
-
-    // Axios.get("http://"+host+":"+port+paht+"?AddUser&mail="+mail+"&name="+name+"&pass="+pass)
+        .then((response) => response.json())
+        .then(response => {
+            console.log(response);
+            if (response == 1) {
+                setCheckCharge(true)
+            }
+        }).catch((error) => {
+            console.log("ERREUR", error);
+            setCheckCharge(false)
+        })
 
 }
 
-export const AddNewPic = (id,image) =>{
+export const AllImg = async () => {
 
-    fetch("http://"+host+":"+port+paht+"?AddPic&id="+id+"&image="+image)
-    
+    await fetch("http://localhost:8000/api/imageList", {
+        method: 'POST',
+    })
+        .then((response) => response.json())
+        .then(response => {
+            console.log(response);
+            AllImages = response;
+            setData(AllImages);
+        })
+
 }

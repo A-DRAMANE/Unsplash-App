@@ -15,17 +15,23 @@ function Header() {
         setx(true)
         console.log(AddImage);
     }
+
+    const handleShearch = (e) =>{
+        e.preventDefault()
+        console.log('cest zooo');
+    }
+
     return (
-        <header className='header'>
+        <header className='header container'>
             <img src={logo} alt='logo'/>
             <div className='logo-s'>
-                <div className='search'>
-                    <SearchIcon className='icon-s'></SearchIcon>
+                <form onSubmit={handleShearch} className='search'>
+                    <button className='button-s'><SearchIcon className='icon-s'></SearchIcon></button>
                     <input
                         type='text'
                         placeholder='Search by name'
                     />
-                </div>
+                </form>
                 <div>
                     <Button onClick={handleAdd} active className='my-btn' variant="success">Add a photo</Button>
                 </div>
