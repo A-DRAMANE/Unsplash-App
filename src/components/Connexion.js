@@ -41,6 +41,7 @@ function Connexion() {
     }
 
     const handleInscription = () =>{
+        localStorage.removeItem('result');
         history.push("/inscription")
     }
 

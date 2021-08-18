@@ -62,8 +62,17 @@
   background-color:#02b902 !important;
   color: #ffffff;
 }
+.btn2{
+  width: 164px;
+}
 .AddPicDisplay{
   display: none;
+}
+.modal {
+  background-color: transparent;
+}
+.bi-emoji-frown{
+  color: red;
 }
 
 @media screen and (max-width: 770px) {

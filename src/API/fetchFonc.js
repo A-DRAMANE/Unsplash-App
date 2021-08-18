@@ -1,18 +1,19 @@
-import Axios from 'axios'
-import { setResult, setCheckCharge, setData } from '../localStorage/setData'
-const host = 'localhost';
-const port = 80;
-const paht = '/API/txt.php'
+import { setResult, setCheckCharge,setData , setCurrentUser, setUser} from '../localStorage/setData'
+const host = "http://localhost:";
+const port = "8000";
+const paht = "/api/"
+const urlMy = host+port+paht
 
 export let resultat = false;
 export let AllImages = false;
+export let AllUser = false; 
 
 
 export const AddNewUser = async (mail, name, pass) => {
 
     let user = { mail, name, pass }
 
-    await fetch("http://localhost:8000/api/register", {
+    await fetch(urlMy+"register", {
         method: 'POST',
         body: JSON.stringify(user),
         headers: {
@@ -23,6 +24,7 @@ export const AddNewUser = async (mail, name, pass) => {
         .then(response => {
             resultat = response;
             setResult(resultat);
+            setUser(resultat)
             console.log(response);
         })
 
@@ -31,7 +33,7 @@ export const LogIn = async (name, pass) => {
 
     let user = { name, pass }
 
-    await fetch("http://localhost:8000/api/logIn", {
+    await fetch(urlMy+"logIn", {
         method: 'POST',
         body: JSON.stringify(user),
         headers: {
@@ -42,6 +44,7 @@ export const LogIn = async (name, pass) => {
         .then(response => {
             resultat = response;
             setResult(resultat)
+            setUser(resultat)
         })
 
 }
@@ -54,7 +57,7 @@ export const AddNewPic = async (id, file, description) => {
     formData.append('file', file);
     formData.append('description', description);
 
-    await fetch("http://localhost:8000/api/addImages", {
+    await fetch(urlMy+"addImages", {
         method: 'POST',
         body: formData
     })
@@ -73,7 +76,7 @@ export const AddNewPic = async (id, file, description) => {
 
 export const AllImg = async () => {
 
-    await fetch("http://localhost:8000/api/imageList", {
+    await fetch(urlMy+"imageList", {
         method: 'POST',
     })
         .then((response) => response.json())
@@ -81,6 +84,20 @@ export const AllImg = async () => {
             console.log(response);
             AllImages = response;
             setData(AllImages);
+        })
+
+}
+
+export const AllUsers = async () => {
+
+    await fetch(urlMy+"users", {
+        method: 'GET',
+    })
+        .then((response) => response.json())
+        .then(response => {
+            console.log(response);
+            AllUser = response;
+            setCurrentUser(AllUser)
         })
 
 }

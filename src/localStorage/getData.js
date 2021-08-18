@@ -21,3 +21,21 @@ export function getImages () {
         return data;
     }else return false;
 }
+
+
+export function getCurrentUser () {
+    let result = localStorage.getItem('currentUser');
+    if(result !== null) {
+        let data = JSON.parse(result);
+        return data;
+    }else return false;
+}
+
+
+export function getUser () {
+    let result = localStorage.getItem('Me');
+    if(result !== null) {
+        let data = JSON.parse(result);
+        return data;
+    }else return false;
+}

@@ -39,4 +39,10 @@ class AddUser extends Controller
         }
         return ["success"=>true,"result"=>$user];
     }
+
+    public function users(Request $req)
+    {
+        $user = User::orderBy('id', 'desc')->get(["id","name"]);
+        return $user;
+    }
 }

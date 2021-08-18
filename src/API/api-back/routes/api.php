@@ -22,5 +22,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('register',[AddUser::class,'register']);
 Route::post('logIn',[AddUser::class,'logIn']);
+Route::get('users',[AddUser::class,'users']);
 Route::post('addImages',[AddImages::class,'addImages']);
 Route::post('imageList',[AddImages::class,'imageList']);
