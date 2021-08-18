@@ -61,17 +61,30 @@
 .opacity{
     opacity: 1 !important;
 }
-svg{
+.overEff svg{
     background-color: transparent;
     cursor: pointer;
     transition: .5s;
 }
-svg:hover{
+.overEff svg:hover{
     background-color: #127903b0;
-    padding: 5px;
+    padding: 3px;
     border-radius: 5px;
     border: 1px solid white;
+    width: 36px;
+    height: 36px;
+
 }
 .overEff span{
     background-color: transparent;
+}
+.my-eyes{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    width: 36px;
+    height: 29px;
+    background-color: #0000003b;
+    border-radius: 5px;
 }

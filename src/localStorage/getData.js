@@ -39,3 +39,13 @@ export function getUser () {
         return data;
     }else return false;
 }
+
+
+
+export function getDeleteImage () {
+    let result = localStorage.getItem('deleteImg');
+    if(result !== null) {
+        let data = JSON.parse(result);
+        return data;
+    }else return false;
+}

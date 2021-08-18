@@ -1,4 +1,4 @@
-import { setResult, setCheckCharge,setData , setCurrentUser, setUser} from '../localStorage/setData'
+import { setResult, setCheckCharge,setData , setCurrentUser, setUser, setDeleteImage } from '../localStorage/setData'
 const host = "http://localhost:";
 const port = "8000";
 const paht = "/api/"
@@ -7,6 +7,7 @@ const urlMy = host+port+paht
 export let resultat = false;
 export let AllImages = false;
 export let AllUser = false; 
+export let del = false; 
 
 
 export const AddNewUser = async (mail, name, pass) => {
@@ -98,6 +99,24 @@ export const AllUsers = async () => {
             console.log(response);
             AllUser = response;
             setCurrentUser(AllUser)
+        })
+
+}
+
+export const DeleteImg = async (id) => {
+
+    const formData = new FormData();
+    formData.append('id', id);
+
+    await fetch(urlMy+"delededImg", {
+        method: 'POST',
+        body: formData
+    })
+        .then((response) => response.json())
+        .then(response => {
+            console.log(response);
+            del = response;
+            setDeleteImage(del);
         })
 
 }

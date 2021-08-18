@@ -25,3 +25,4 @@ Route::post('logIn',[AddUser::class,'logIn']);
 Route::get('users',[AddUser::class,'users']);
 Route::post('addImages',[AddImages::class,'addImages']);
 Route::post('imageList',[AddImages::class,'imageList']);
+Route::post('delededImg',[AddImages::class,'delededImg']);

@@ -1,6 +1,6 @@
 import React,{ useEffect, useRef, useState } from 'react'
 import '../css/Inscription.css'
-import logo from '../images/my_unsplash_logo.svg'
+import logo from '../images/logoAll.png'
 import { Annim1, messageAnni } from '../gsapAnnim'
 import {useHistory} from 'react-router-dom'
 import { AddNewUser } from '../API/fetchFonc'
@@ -60,7 +60,7 @@ function Inscription() {
         <div className='inCenter'>
             <h1 className='title'>Inscription</h1>
             <div ref={ConnAnnim} className='inscription'>
-                <img src={logo}/>
+                <img className='my-logo' src={logo}/>
                 <form onSubmit={handleInscription} className='inForm'>
                     <input required
                      onChange={e => setMail(e.target.value

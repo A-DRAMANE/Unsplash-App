@@ -23,4 +23,16 @@ class AddImages extends Controller
     {
         return Image::orderBy('id', 'desc')->get();
     }
+
+    public function delededImg (Request $req)
+    {
+       $img = Image::where('id', $req->id)->delete();
+
+       if ($img) {
+            return ["delete"=>true];
+       } else {
+         return ["delete"=>false];
+       }
+       
+    }
 }

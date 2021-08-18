@@ -17,3 +17,7 @@ export function setCurrentUser(data) {
 export function setUser(data) {
     localStorage.setItem('Me', JSON.stringify(data))
 }
+
+export function setDeleteImage(data) {
+    localStorage.setItem('deleteImg', JSON.stringify(data))
+}

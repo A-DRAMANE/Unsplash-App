@@ -4,11 +4,12 @@ import {Form, Button } from 'react-bootstrap'
 import { Annim2, rev, imgAnniView } from '../gsapAnnim'
 import '../css/AddPic.css'
 import { AddNewPic } from '../API/fetchFonc'
-import { getCheckCharge } from '../localStorage/getData'
+import { getCheckCharge, getUser } from '../localStorage/getData'
 
-function AddPic({ AddImage,x, setx }) {
+function AddPic({ AddImage, x, setx, functions }) {
 
-    console.log(getCheckCharge());
+    const [addImgStatus, setaddImgStatus] = functions;
+    
     const [description, setDescription] = useState('')
     const [imageSelected, setImageSelected] = useState(null)
     const [baseImage, setBaseImage] = useState("");
@@ -41,13 +42,28 @@ function AddPic({ AddImage,x, setx }) {
         rev(AddImage);
         setx(false);
     }
+    const images = async () =>{
+
+        localStorage.removeItem('IMAGES');
+    }
+
+    const handleDone = (e) =>{
+        e.preventDefault();
+        images();
+        setBaseImage("");
+        setCharge(null);
+        setStatus(0);
+        rev(AddImage);
+        setx(false);
+        setaddImgStatus(true);
+    }
 
     const handleLoad = async (e) =>{
         e.preventDefault();
         if (description.length > 2) {
             if (imageSelected !== null) {
                 setCharge(false);
-                await AddNewPic(5,imageSelected,description);
+                await AddNewPic(getUser().result.id,imageSelected,description);
                 setStatus(status + 1)
             } else {
                 alert("selectionnez une image et decrivez la correctement, au moins 3 lettres.")
@@ -125,7 +141,7 @@ function AddPic({ AddImage,x, setx }) {
                     </Button>
                 </div> :
                 <Button
-                onClick={handleCansel} 
+                onClick={handleDone} 
                  className='btnAdd m-3' variant="success">
                     TERMINER
                 </Button>

@@ -34,7 +34,7 @@ class AddUser extends Controller
 
         if (!$user || $user->pass !== $req->pass ) {
 
-            return ["error"=>"Le nom d'utilisateur ou le mot de passe n'est pas correcte.",
+            return ["error"=>"INCORRECT.",
             "success"=>false];
         }
         return ["success"=>true,"result"=>$user];

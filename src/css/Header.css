@@ -59,7 +59,7 @@
   font-weight: bold;
   font-size: 16px;
   line-height: 22px;
-  background-color:#02b902 !important;
+  background-color:#004b07 !important;
   color: #ffffff;
 }
 .btn2{
@@ -74,7 +74,28 @@
 .bi-emoji-frown{
   color: red;
 }
-
+.my-logo{
+  width: 109px;
+  height: 83px;
+  margin-right: 15px;
+}
+.my-status{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.my-status svg{
+  font-size: 26px;
+  margin-right: 15px;
+  font-weight: bold;
+}
+.my-user{
+  text-transform: capitalize;
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 15px;
+  text-align: center;
+}
 @media screen and (max-width: 770px) {
   .logo-s {
     flex-direction: column;

@@ -1,5 +1,5 @@
 import React,{ useRef, useState } from 'react'
-import logo from '../images/my_unsplash_logo.svg'
+import logo from '../images/logoAll.png'
 import SearchIcon from '@material-ui/icons/Search';
 import {Button} from 'react-bootstrap'
 import AddPic from './AddPic'
@@ -7,12 +7,14 @@ import { getUser } from '../localStorage/getData'
 import { useHistory } from 'react-router-dom'
 import '../css/Header.css'
 
-function Header() {
+function Header({functions}) {
+
 
     let history = useHistory()
     const AddImage = useRef(null)
     const Modal = useRef(null)
     const [x, setx] = useState(false)
+    console.log(getUser());
 
     const handleAdd = (e) =>{
         AddImage.current.style.display = 'flex'
@@ -33,9 +35,31 @@ function Header() {
         console.log('cest zooo');
     }
 
+    const handleToConnect = (e) =>{
+        history.push("/connexion")
+    }
+
     return (
         <header className='header container'>
-            <img src={logo} alt='logo'/>
+            <div className='my-status'>
+                <img className='my-logo' src={logo} alt='logo'/> 
+                {
+                    getUser() == false  || getUser().success == false ? 
+                    <div style={{cursor:'pointer'}} onClick={handleToConnect} className='my-user'>
+                        {/* <span className="iconify" data-icon="clarity:disconnected-line"></span>  */}
+                        <span className="iconify" data-icon="emojione-monotone:loudly-crying-face"></span> déconnecter
+                    </div>
+
+                    :
+                    <div className='my-user'>
+                        <span style={{color: "#004b07",margin:'0px'}} className="iconify" data-icon="carbon:user-online"></span>
+                        <span>{getUser().result.name}</span>
+                    </div>
+
+                }
+                              
+            </div>
+
             <div className='logo-s'>
                 <form onSubmit={handleShearch} className='search'>
                     <button className='button-s'><SearchIcon className='icon-s'></SearchIcon></button>
@@ -46,15 +70,15 @@ function Header() {
                 </form>
                 <div>
                     {
-                        getUser() == false?
+                        getUser() == false  || getUser().success == false ?
                             ""
-                        :  <Button onClick={handleAdd} active className='my-btn' variant="success">Add a photo</Button>
+                        :  <Button onClick={handleAdd} active className='my-btn' variant="success"> Ajout Une photo </Button>
                     }
                 </div>
             </div>
-            <AddPic x={x} setx={setx} AddImage={AddImage}/>
+            <AddPic x={x} setx={setx} AddImage={AddImage} functions={functions}/>
             {
-                getUser() == false ? <Button type="button" className="my-btn btn2" data-bs-toggle="modal" data-bs-target="#exampleModal"> Add a photo </Button>
+                getUser() == false  || getUser().success == false ? <Button type="button" className="my-btn btn2" data-bs-toggle="modal" data-bs-target="#exampleModal"> Ajout Une photo </Button>
                 : ''
             }
             <div className="modal fade" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
