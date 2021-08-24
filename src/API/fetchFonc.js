@@ -2,7 +2,7 @@ import { setResult, setCheckCharge,setData , setCurrentUser, setUser, setDeleteI
 const host = "http://localhost:";
 const port = "8000";
 const paht = "/api/"
-const urlMy = host+port+paht
+export const urlMy = host+port+paht
 
 export let resultat = false;
 export let AllImages = false;
@@ -65,7 +65,7 @@ export const AddNewPic = async (id, file, description) => {
         .then((response) => response.json())
         .then(response => {
             console.log(response);
-            if (response == 1) {
+            if (response === 1) {
                 setCheckCharge(true)
             }
         }).catch((error) => {

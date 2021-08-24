@@ -56,11 +56,15 @@ function Inscription() {
         }
     }
 
+    const handleToHome = (e) =>{
+        history.push("/")
+    }
+
     return (
         <div className='inCenter'>
             <h1 className='title'>Inscription</h1>
             <div ref={ConnAnnim} className='inscription'>
-                <img className='my-logo' src={logo}/>
+                <img onClick={handleToHome} className='my-logo' alt="my-log" src={logo}/>
                 <form onSubmit={handleInscription} className='inForm'>
                     <input required
                      onChange={e => setMail(e.target.value

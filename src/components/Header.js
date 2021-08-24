@@ -44,7 +44,7 @@ function Header({functions}) {
             <div className='my-status'>
                 <img className='my-logo' src={logo} alt='logo'/> 
                 {
-                    getUser() == false  || getUser().success == false ? 
+                    getUser() === false  || getUser().success === false ? 
                     <div style={{cursor:'pointer'}} onClick={handleToConnect} className='my-user'>
                         {/* <span className="iconify" data-icon="clarity:disconnected-line"></span>  */}
                         <span className="iconify" data-icon="emojione-monotone:loudly-crying-face"></span> déconnecter
@@ -70,7 +70,7 @@ function Header({functions}) {
                 </form>
                 <div>
                     {
-                        getUser() == false  || getUser().success == false ?
+                        getUser() === false  || getUser().success === false ?
                             ""
                         :  <Button onClick={handleAdd} active className='my-btn' variant="success"> Ajout Une photo </Button>
                     }
@@ -78,7 +78,7 @@ function Header({functions}) {
             </div>
             <AddPic x={x} setx={setx} AddImage={AddImage} functions={functions}/>
             {
-                getUser() == false  || getUser().success == false ? <Button type="button" className="my-btn btn2" data-bs-toggle="modal" data-bs-target="#exampleModal"> Ajout Une photo </Button>
+                getUser() === false  || getUser().success === false ? <Button type="button" className="my-btn btn2" data-bs-toggle="modal" data-bs-target="#exampleModal"> Ajout Une photo </Button>
                 : ''
             }
             <div className="modal fade" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -126,10 +126,10 @@ function AddPic({ AddImage, x, setx, functions }) {
  
                 </div>
 
-                { baseImage == "" ? "" : <img ref={imgToAdd} className="imageView" src={baseImage} height="200px"/> }
+                { baseImage === "" ? "" : <img ref={imgToAdd} alt="imgToAdd" className="imageView" src={baseImage} height="200px"/> }
 
-                {charge == false ? <div className='load'></div> : "" }
-                {charge == true ?  <div>Votre image à été ajouter!</div> :'' }
+                {charge === false ? <div className='load'></div> : "" }
+                {charge === true ?  <div>Votre image à été ajouter!</div> :'' }
                 
                 {charge !== true ?
                 <div className='buttons'>

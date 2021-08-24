@@ -19,7 +19,6 @@ function Main({functions}) {
     const [userPass, setuserPass] = useState("")
     const [loadStatus, setloadStatus] = useState(false)
     const Modal2 = useRef(null)
-    const ImageToDownLoad = useRef(null)
     let Auteur = '';
 
     useEffect(() => {
@@ -38,7 +37,7 @@ function Main({functions}) {
             setDataUsers(getCurrentUser())
             setDataImages(getImages())
         }
-        if (DataImages.length == 0) {
+        if (DataImages.length === 0) {
             setDataUsers(getCurrentUser())
             setDataImages(getImages())
         }
@@ -50,11 +49,11 @@ function Main({functions}) {
     }
 
     const handleDelete = async (e) =>{
-        if (userPass == '') {
+        if (userPass === '') {
             alert('Entrez votre mots de pass')
         } else {
             
-            if (getUser().result.pass == userPass) {
+            if (getUser().result.pass === userPass) {
                 console.log(MyImgId,userPass,getUser());  
                 setloadStatus(true);
                 await DeleteImg(MyImgId);
@@ -78,19 +77,29 @@ function Main({functions}) {
         history.push("/connexion")
     }
 
-    const handleDownLoadImg = (tag) =>{
-        console.log(tag);
-        let items = document.getElementsByClassName('items');
-        // console.log(items);
-        for(let i in items){
-            console.log(items[i]);
-         }
+    const handleDownLoadImg = (id) =>{
+        console.log(id);
+        
         DataImages.forEach(element => {
-            // console.log(element);
-            if (element.id == tag) {
+            
+            if (element.id === id) {
                 console.log(element);
+                Download(element)
             }
         });
+    }
+
+    const Download = (element) =>{
+        let aCreat = document.createElement('a');
+        aCreat.setAttribute('href', MyURL+element.image_path);
+        aCreat.setAttribute('download',element.id);
+
+        aCreat.style.display = 'none';
+        document.body.appendChild(aCreat);
+
+        aCreat.click();
+
+        document.body.removeChild(aCreat);        
     }
 
     return (
@@ -101,7 +110,7 @@ function Main({functions}) {
 
                     <div className='col-4 cart'>
                         <span className="iconify my-eyes" data-icon="icon-park-outline:eyes"></span>
-                        <img download id={item.id} key={item.id} src={MyURL+item.image_path} alt="image" className='img-fluid items'/>
+                        <img download id={item.id} key={item.id} src={MyURL+item.image_path} alt="image_here" className='img-fluid items'/>
                         <div className='overEff'
                             onClick={imgClick} >
                             <Button onClick={e => handleSetId(item.id)} className='btn' data-bs-toggle="modal" data-bs-target="#Modal2" variant="outline-danger">Supprimé</Button>
@@ -110,7 +119,7 @@ function Main({functions}) {
                                 <p className='d-flex justify-content-between'>
                                     {
                                         DataUsers.forEach(element => {
-                                            if (element.id == item.idUser) {
+                                            if (element.id === item.idUser) {
                                                 Auteur = element.name;
                                                 }
                                             }
@@ -136,7 +145,7 @@ function Main({functions}) {
                         <div className="modal-content">
                             <div className="modal-header">
                                 {
-                                    getUser() == false  || getUser().success == false ?
+                                    getUser() === false  || getUser().success === false ?
                                     <h5 className="modal-title" id="exampleModalLabel"> Oups    
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-emoji-frown" viewBox="0 0 16 16">
                                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -154,7 +163,7 @@ function Main({functions}) {
                                 <button ref={Modal2} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             {
-                                getUser() == false  || getUser().success == false ?
+                                getUser() === false  || getUser().success === false ?
                                 <div className="modal-body">
                                     Désoler connectez vous pour supprimer des photos
                                 </div> :
@@ -163,7 +172,7 @@ function Main({functions}) {
                                         onChange={e => setuserPass(e.target.value)}
                                     />
                                     {
-                                        loadStatus == true ? 
+                                        loadStatus === true ? 
                                         <div className='load'></div> :
                                         " "
                                     }
@@ -171,7 +180,7 @@ function Main({functions}) {
                             }
 
                             {
-                                getUser() == false  || getUser().success == false ?
+                                getUser() === false  || getUser().success === false ?
                                 <div className="modal-footer">
                                     <button onClick={handleConnect} type="button" className="btn btn-outline-success">se connectez</button>
                                 </div> :

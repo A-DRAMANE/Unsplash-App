@@ -46,11 +46,15 @@ function Connexion() {
         history.push("/inscription")
     }
 
+    const handleToHome = (e) =>{
+        history.push("/")
+    }
+
     return (
         <div className='conCenter'>
             <h1 className='title'>Connexion</h1>
             <div ref={ConnAnnim} className='connexion'>
-                <img className='my-logo' src={logo}/>
+                <img onClick={handleToHome} className='my-logo' alt="my-logo" src={logo}/>
                 <p>*Veiller vous identifiez</p>
                 <form onSubmit={handleSubmit} className='conForm'>
                     <input placeholder='Nom Utilisateur' type='text'
@@ -61,7 +65,7 @@ function Connexion() {
                     />
                     <button>connexion</button>
                 </form>
-                {Log == '' ? "" : <div className='errorConn'>{Log}</div>}
+                {Log === '' ? "" : <div className='errorConn'>{Log}</div>}
                 <span onClick={handleInscription}>s'inscrire</span>
             </div>
 
