@@ -125,6 +125,9 @@ function Main({functions}) {
                                             }
                                         )
                                     } <span>par ~{Auteur}</span>
+                                    {/* <a href="http://localhost:8000/images/1FELxEzbPQw4SEZGBXEreST6rGTXhsPedOTHBNQl.jpg" download>
+
+                                    </a> */}
                                     <svg 
                                         onClick={ e => handleDownLoadImg(item.id) } 
                                     xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" className="bi bi-download" viewBox="0 0 16 16">

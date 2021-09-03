@@ -11,17 +11,19 @@
 .search {
   width: 300px;
   height: 55px;
+  max-width: 90%;
   border: 1px solid #bdbdbd;
   box-sizing: border-box;
   filter: drop-shadow(0px 1px 6px rgba(0, 0, 0, 0.1));
   border-radius: 12px;
   background-color: #ffffff;
-  padding: 15px;
+  padding: 0px;
   display: flex;
 }
 .search > input {
   border: transparent;
   height: 100%;
+  width: 85%;
   font-family: "Noto Sans", sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -30,9 +32,10 @@
   color: #bdbdbd;
   padding-left: 24px;
   background-color: white;
+  border-radius: 12px;
 }
 .search > input:focus {
-  outline: none;
+  /* outline: none; */
 }
 .button-s {
   width: 27px;
@@ -42,6 +45,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: auto;
 }
 .icon-s{
   width: 27px;
