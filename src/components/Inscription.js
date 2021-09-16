@@ -1,6 +1,6 @@
 import React,{ useEffect, useRef, useState } from 'react'
 import '../css/Inscription.css'
-import logo from '../images/logoAll.png'
+import logo from '../images/monLogo.png'
 import { Annim1, messageAnni } from '../gsapAnnim'
 import {useHistory} from 'react-router-dom'
 import { AddNewUser } from '../API/fetchFonc'

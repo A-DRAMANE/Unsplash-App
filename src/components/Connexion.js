@@ -1,6 +1,6 @@
 import React,{ useEffect, useRef, useState} from 'react'
 import '../css/Connexion.css'
-import logo from '../images/logoAll.png'
+import logo from '../images/monLogo.png'
 import { useHistory } from 'react-router-dom'
 import {Annim1} from '../gsapAnnim'
 import { LogIn } from '../API/fetchFonc'

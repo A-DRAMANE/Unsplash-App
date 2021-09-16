@@ -34,9 +34,9 @@
   background-color: white;
   border-radius: 12px;
 }
-.search > input:focus {
-  /* outline: none; */
-}
+/* .search > input:focus {
+  outline: #0d004e;
+} */
 .button-s {
   width: 27px;
   height: 33px;
@@ -90,7 +90,7 @@
 }
 .my-status svg{
   font-size: 26px;
-  margin-right: 15px;
+  /* margin-right: 15px; */
   font-weight: bold;
 }
 .my-user{
@@ -99,6 +99,7 @@
   font-weight: bold;
   margin-right: 15px;
   text-align: center;
+  color: #ff000073;
 }
 @media screen and (max-width: 770px) {
   .logo-s {

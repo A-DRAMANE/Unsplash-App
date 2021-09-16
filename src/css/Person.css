@@ -1,0 +1,11 @@
+.person-btnShow{
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    z-index: -1
+}
+.my-modalPerson{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
